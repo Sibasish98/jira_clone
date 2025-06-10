@@ -14,7 +14,7 @@ export const findEntityOrThrow = async <T extends EntityConstructor>(
   id: number | string,
   options?: FindOneOptions,
 ): Promise<InstanceType<T>> => {
-  const instance = await Constructor.findOne(id, options);
+  const instance = await Constructor.findOne({ where: { id }, ...options });
   if (!instance) {
     throw new EntityNotFoundError(Constructor.name);
   }
@@ -38,7 +38,7 @@ export const createEntity = async <T extends EntityConstructor>(
   Constructor: T,
   input: Partial<InstanceType<T>>,
 ): Promise<InstanceType<T>> => {
-  const instance = Constructor.create(input);
+  const instance = (Constructor as any).create(input);
   return validateAndSaveEntity(instance as InstanceType<T>);
 };
 

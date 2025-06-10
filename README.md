@@ -1,4 +1,4 @@
-<h1 align="center">A simplified Jira clone built with React and Node</h1>
+<h1 align="center">A simplified Jira clone built with React and Node (Use Node 16, and "PostgreSQL 14.18 (Ubuntu 14.18-0ubuntu0.22.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, 64-bit"</h1>
 
 <div align="center">Auto formatted with Prettier, tested with Cypress 🎗</div>
 
