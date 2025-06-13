@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Droppable } from 'react-beautiful-dnd';
@@ -6,8 +6,9 @@ import { intersection } from 'lodash';
 
 import { IssueStatusCopy } from 'shared/constants/issues';
 
+import { Icon } from 'shared/components';
 import Issue from './Issue';
-import { List, Title, IssuesCount, Issues } from './Styles';
+import { List, Title, IssuesCount, Issues, CreateIssueWrapper } from './Styles';
 
 const propTypes = {
   status: PropTypes.string.isRequired,
@@ -25,10 +26,15 @@ const ProjectBoardList = ({ status, project, filters, currentUserId }) => {
   const filteredListIssues = getSortedListIssues(filteredIssues, status);
   const allListIssues = getSortedListIssues(project.issues, status);
 
+  const [isHoveredColumn, setIsHoveredColumn] = useState(null);
+
   return (
     <Droppable key={status} droppableId={status}>
       {provided => (
-        <List>
+        <List
+          onMouseEnter={() => setIsHoveredColumn(true)}
+          onMouseLeave={() => setIsHoveredColumn(false)}
+        >
           <Title>
             {`${IssueStatusCopy[status]} `}
             <IssuesCount>{formatIssuesCount(allListIssues, filteredListIssues)}</IssuesCount>
@@ -42,6 +48,12 @@ const ProjectBoardList = ({ status, project, filters, currentUserId }) => {
               <Issue key={issue.id} projectUsers={project.users} issue={issue} index={index} />
             ))}
             {provided.placeholder}
+            {isHoveredColumn && (
+              <CreateIssueWrapper>
+                <Icon type="plus" size={27} />
+                <span>Create Issue</span>
+              </CreateIssueWrapper>
+            )}
           </Issues>
         </List>
       )}

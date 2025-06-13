@@ -12,6 +12,8 @@ export const List = styled.div`
   background: ${color.backgroundLightest};
 `;
 
+export const CreateIssueWrapper = styled.div``;
+
 export const Title = styled.div`
   padding: 13px 10px 17px;
   text-transform: uppercase;
