@@ -7,6 +7,7 @@ import { intersection } from 'lodash';
 import { IssueStatusCopy } from 'shared/constants/issues';
 
 import { Icon } from 'shared/components';
+import { createQueryParamModalHelpers } from 'shared/utils/queryParamModal';
 import Issue from './Issue';
 import { List, Title, IssuesCount, Issues, CreateIssueWrapper } from './Styles';
 
@@ -27,6 +28,8 @@ const ProjectBoardList = ({ status, project, filters, currentUserId }) => {
   const allListIssues = getSortedListIssues(project.issues, status);
 
   const [isHoveredColumn, setIsHoveredColumn] = useState(null);
+
+  const issueCreateModalHelpers = createQueryParamModalHelpers('issue-create');
 
   return (
     <Droppable key={status} droppableId={status}>
@@ -49,9 +52,9 @@ const ProjectBoardList = ({ status, project, filters, currentUserId }) => {
             ))}
             {provided.placeholder}
             {isHoveredColumn && (
-              <CreateIssueWrapper>
-                <Icon type="plus" size={27} />
-                <span>Create Issue</span>
+              <CreateIssueWrapper onClick={() => issueCreateModalHelpers.open()}>
+                <Icon type="plus" size={16} />
+                <span style={{ marginLeft: '4px', fontSize: '13px' }}>Create Issue</span>
               </CreateIssueWrapper>
             )}
           </Issues>

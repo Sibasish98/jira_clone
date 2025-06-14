@@ -12,7 +12,14 @@ export const List = styled.div`
   background: ${color.backgroundLightest};
 `;
 
-export const CreateIssueWrapper = styled.div``;
+export const CreateIssueWrapper = styled.div`
+  &:hover {
+    background-color: #eee;
+    cursor: pointer;
+  }
+  padding: 10px;
+  display: flex;
+`;
 
 export const Title = styled.div`
   padding: 13px 10px 17px;
